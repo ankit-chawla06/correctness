@@ -1,0 +1,47 @@
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "Run Correctness Checks",
+  "States": {
+    "Run Correctness Checks": {
+      "Type": "Map",
+      "End": true,
+      "Iterator": {
+        "StartAt": "Run Jobs",
+        "States": {
+          "Run Jobs": {
+            "Type": "Map",
+            "Iterator": {
+              "StartAt": "first",
+              "States": {
+                "first": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::glue:startJobRun.sync",
+                  "Parameters": {
+                    "JobName.$": "$.JobName",
+                    "Arguments.$": "$.Default_Args"
+                  },
+                  "End": true,
+                  "InputPath": "$",
+                  "ResultPath": "$.TaskResult"
+                }
+              }
+            },
+            "MaxConcurrency": 1,
+            "ItemsPath": "$",
+            "InputPath": "$.Info",
+            "Next": "Correctness Check Job"
+          },
+          "Correctness Check Job": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::glue:startJobRun.sync",
+            "Parameters": {
+              "JobName": "doNothing"
+            },
+            "End": true
+          }
+        }
+      },
+      "MaxConcurrency": 1
+    }
+  }
+}
