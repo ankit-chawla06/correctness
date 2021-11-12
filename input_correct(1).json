@@ -1,0 +1,25 @@
+[
+  { 
+      "Name": "TEST_CORRECTNESS_1",        
+      "Info" : [ 
+        {
+          "Default_Args":{
+            "--input_data_path" : "s3://test-bucket-glue-ankit/input/l2s2.csv"
+          },
+          "JobName": "s3tos3"
+        } 
+      ]
+  },
+  { 
+    "Name": "TEST_CORRECTNESS_2",        
+    "Info" : [ 
+      {
+        "Default_Args":{
+          "--input_data_path" : "s3://test-bucket-glue-ankit/input/l2s2.csv"
+        },
+        "JobName": "s3tos3"
+      } 
+    ]
+  }
+
+]
