@@ -1,0 +1,21 @@
+[
+        { 
+            "Name": "TEST_CORRECTNESS_1",        
+            "Info" : [ 
+                {
+                    "JobName": "glue-job-name",
+                    "Default_Args":{
+                        "Input_Data_Path" : "s3://"
+                    },
+                    "Target_Location":{
+                        "Target_Type" : "s3",
+                        "Correctness_Argument":{
+                            "JDBC_URL":"JDBC://"
+                        }
+                    },
+                    "Expected Data":"s3://path"
+                }
+            ]
+        }
+    ]
+    
